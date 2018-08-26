@@ -1,18 +1,24 @@
 var express = require('express');
+var bodyParser = require("body-parser");
 
 var app = express();
+	port = normalizePort(process.env.PORT || '3000');
 
-var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 console.log(`Running on port: ${port}`);
+
+app.configure(function(){
+  app.use(express.bodyParser());
+  app.use(app.router);
+});
 
 app.get('/', (req, res) => {
 	res.send('gotten');
 })
 
 app.post('/battery', (req, res) => {
-	res.send('battery');
-	console.log(req);
+	console.log(req.body.payload);
+	res.send('sent battery info');
 })
 
 app.listen(port);
