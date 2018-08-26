@@ -75,7 +75,7 @@ function getBattery(msg) {
   var regex = /(?<=\(0-1\)\: )\d+(\.\d+)?/g;
   var result = msg.match(regex);
   var avgCharge = ((Number(result[0]) + Number(result[1])) / 2) * 100;
-  if (timeToEmpty < 10) {
+  if (avgCharge < 10) {
     return true;
   } else {
     return false;
