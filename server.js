@@ -42,6 +42,7 @@ app.post('/battery', (req, res) => {
   console.log(entering);
   console.log("Left Pool");
   console.log(leaving);
+  console.log(`${genie}`);
 	res.send('sent battery info');
 });
 
