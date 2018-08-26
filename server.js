@@ -42,7 +42,7 @@ app.post('/battery', (req, res) => {
   console.log(entering);
   console.log("Left Pool");
   console.log(leaving);
-  console.log(`${genie}`);
+  console.log(`${genie_token}`);
 	res.send('sent battery info');
 });
 
