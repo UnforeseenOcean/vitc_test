@@ -1,15 +1,15 @@
 var express = require('express');
+var router = express.Router();
 var bodyParser = require("body-parser");
 
-var app = express(),
-	port = normalizePort(process.env.PORT || '3000');
+var app = express();
+var	port = normalizePort(process.env.PORT || '3000');
 
 app.set('port', port);
 console.log(`Running on port: ${port}`);
 
-app.use(express.bodyParser());
-app.use(app.router);
-
+router.use(bodyParser.urlencoded({ extended: false }));
+router.use(bodyParser.json());
 
 app.get('/', (req, res) => {
 	res.send('gotten');
