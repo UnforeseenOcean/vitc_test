@@ -22,7 +22,8 @@ app.post('/battery', (req, res) => {
 		var logObj = getJSON(payload[i]);
 		var lowBattery = getBattery(logObj.msg);
 		var chuck = logObj.mfp.id;
-		var inPool = lowChucks.includes(chuck);
+    console.log(chuck);
+		/*var inPool = lowChucks.includes(chuck);
 		console.log(chuck+'\n'+(lowBattery && !inPool)+'\n'+(!lowBattery && inPool));
 		if (lowBattery && !inPool) {
 		  lowChucks.push(chuck);
@@ -33,7 +34,7 @@ app.post('/battery', (req, res) => {
 		  var index = lowChucks.indexOf(chuck);
 		  lowChucks.splice(index, 1);
 		  console.log("end of high battery statement");
-		}
+		}*/
 	}
 	res.send('sent battery info');
 });
