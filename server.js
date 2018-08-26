@@ -7,10 +7,9 @@ var app = express();
 app.set('port', port);
 console.log(`Running on port: ${port}`);
 
-app.configure(function(){
-  app.use(express.bodyParser());
-  app.use(app.router);
-});
+app.use(express.bodyParser());
+app.use(app.router);
+
 
 app.get('/', (req, res) => {
 	res.send('gotten');
