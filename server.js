@@ -8,8 +8,8 @@ var	port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 console.log(`Running on port: ${port}`);
 
-router.use(bodyParser.urlencoded({ extended: false }));
-router.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
 	res.send('gotten');
