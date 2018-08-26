@@ -15,27 +15,33 @@ app.get('/', (req, res) => {
 	res.send('gotten');
 });
 
+var lowChucks = [];
+
 app.post('/battery', (req, res) => {
-	var lowChucks = [];
+  var entering = [];
+  var leaving = [];
 	var payload = req.body.payload;
 	for (var i = 0; i < payload.length; i++) {
 		var logObj = getJSON(payload[i]);
 		var lowBattery = getBattery(logObj.msg);
 		var chuck = logObj.mfp.id;
-    console.log(chuck);
-		/*var inPool = lowChucks.includes(chuck);
-		console.log(chuck+'\n'+(lowBattery && !inPool)+'\n'+(!lowBattery && inPool));
+		var inPool = lowChucks.includes(chuck);
 		if (lowBattery && !inPool) {
 		  lowChucks.push(chuck);
-		  console.log(lowChucks);
+      entering.push(chuck);
 		} 
 		else if (!lowBattery && inPool) {
-		  console.log("High battery and in pool");
 		  var index = lowChucks.indexOf(chuck);
 		  lowChucks.splice(index, 1);
-		  console.log("end of high battery statement");
-		}*/
+      leaving.push(chuck);
+		}
 	}
+  console.log("Low Battery");
+  console.log(lowChucks);
+  console.log("Entered Pool");
+  console.log(entering);
+  console.log("Left Pool");
+  console.log(leaving);
 	res.send('sent battery info');
 });
 
@@ -66,10 +72,9 @@ function getJSON(log) {
 }
 
 function getBattery(msg) {
-  var regex = /m\): (\d+)/;
+  var regex = /(?<=\(0-1\)\: )\d+(\.\d+)?/g;
   var result = msg.match(regex);
-  regex = /\d+/;
-  var timeToEmpty = ((Number(result[0].match(regex)) + Number(result[1].match(regex))) / 2);
+  var timeToEmpty = (Number(result[0]) + Number(result[1])) / 2;
   if (timeToEmpty < 900) {
     return true;
   } else {
