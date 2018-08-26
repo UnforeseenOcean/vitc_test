@@ -1,7 +1,7 @@
 var express = require('express');
 var bodyParser = require("body-parser");
 
-var app = express();
+var app = express(),
 	port = normalizePort(process.env.PORT || '3000');
 
 app.set('port', port);
